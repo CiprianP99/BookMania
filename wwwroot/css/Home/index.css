@@ -1,0 +1,62 @@
+﻿#recRow1 {
+    background-color: #383e56;
+    padding: 20px 10px;
+    border: hidden;
+    border-radius: 25px;
+    -webkit-box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    height: 21.875rem;
+}
+
+#recRow2 {
+    background-color: #383e56;
+    padding: 20px 10px;
+    border: hidden;
+    border-radius: 25px;
+    -webkit-box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    height: 21.875rem;
+}
+
+#recRow3 {
+    background-color: #383e56;
+    padding: 20px 10px;
+    border: hidden;
+    border-radius: 25px;
+    -webkit-box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.5);
+    height: 21.875rem;
+ 
+}
+
+#pSelect3 {
+    font-family: 'Dancing Script', cursive;
+    text-align: right;
+    margin-right: 50px;
+    font-size: 30px;
+    color: #ff884b;
+}
+
+#recCol1 {
+    margin: auto;
+}
+
+#recCol2 {
+    margin: auto;
+}
+
+#recCol3 {
+    margin: auto;
+}
+
+.carousel-control-next {
+    padding-right: 16px;
+}
+
+.carousel-control-prev {
+    padding-left: 16px;
+}
+
+.carousel-item {
+    padding: 4% 8%;
+}

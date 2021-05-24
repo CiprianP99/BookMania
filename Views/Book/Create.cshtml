@@ -1,0 +1,84 @@
+﻿@model BookMania.ViewModels.BookCreationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Book/create.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+
+<hr />
+<div class="card" >
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-md-6">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Pages" class="control-label"></label>
+                    <input asp-for="Pages" class="form-control" />
+                    <span asp-validation-for="Pages" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Year" class="control-label"></label>
+                    <input asp-for="Year" class="form-control" />
+                    <span asp-validation-for="Year" class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group row" style="text-align: center;">
+            <div class="col-sm-2">
+                <label>Authors:</label>
+            </div>
+            <div class="col-sm-9">
+                <select asp-for="SelectedAuthor" class="form-control"
+                        asp-items='@new MultiSelectList(Model.BookAuthors, "AuthorId","FirstName", Model.SelectedAuthor)'>
+                </select>
+                (Hold down CTRL or CMD key to select multiple authors)
+            </div>
+            <div class="col-sm-1">
+                <span asp-validation-for="SelectedAuthor" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="CategoryId"></label>
+            @Html.DropDownList("CategoryId", null, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.CategoryId)
+
+        </div>
+        
+            
+
+
+        
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+<div style="text-align:center;margin-top:20px;">
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

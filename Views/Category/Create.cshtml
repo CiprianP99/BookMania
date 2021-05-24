@@ -1,0 +1,43 @@
+﻿@model BookMania.Models.Category
+
+@{
+    ViewData["Title"] = "Create";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Category/create.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<h4>Add Category</h4>
+<hr />
+<div class="card" style="margin-top:10px;text-align:center;">
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="CategoryName" class="control-label"></label>
+                    <input asp-for="CategoryName" class="form-control" />
+                    <span asp-validation-for="CategoryName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div style="text-align:center;margin-top:2%;">
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+    
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

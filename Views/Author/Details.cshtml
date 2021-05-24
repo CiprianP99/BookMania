@@ -1,0 +1,41 @@
+﻿@model BookMania.Models.Author
+
+@{
+    ViewData["Title"] = "Details";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Author/details.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<hr />
+<div class="card" style="text-align:center;">
+    <div class="row" style="color:#db6400;">
+        <div class="col-6">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </div>
+        <div class="col-6">
+            @Html.DisplayNameFor(model => model.LastName)
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-6">
+            @Html.DisplayFor(model => model.FirstName)
+        </div>
+        <div class="col-6">
+            @Html.DisplayFor(model => model.LastName)
+        </div>
+       
+    </div>
+</div>
+<div style="text-align:center;margin-top:10%;">
+    <a asp-action="Edit" class="buttonB" asp-route-id="@Model.AuthorId">Edit</a> |
+    <a asp-action="Index" class="buttonB">Back to List</a>
+</div>
+
+

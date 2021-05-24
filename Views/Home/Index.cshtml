@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Home/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <div id="recRow1" class="row">
+                <div class="col-3">
+                    @*<img src="img/maitarziu1.jpg" class="bookR" alt="maitarziu-img">*@
+                    There must be an image
+                </div>
+                <div id="recCol1" class="col-9">
+                    <h2 style="color:white;">Cel mai nou titlu</h2>
+                    <p style=" font-size: 30px; color:#ff884b;font-family: 'Dancing Script', cursive;">Stephen King</p>
+                    <p style="color:white;">"O poveste despre inocenta pierduta si dilemele care ne debusoleaza ideile despre bine si rau."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div id="recRow2" class="row">
+                <div class="col-3">
+                    @*<img src="img/strainul.jpg" class="bookR" alt="strainul-img">*@
+                    There must be an image
+                </div>
+                <div id="recCol2" class="col-9">
+                    <h2 style="color:white;">Un titlu plin de mister</h2>
+                    <p style="font-weight:bold; font-size: 30px; color:#ff884b;font-family: 'Dancing Script', cursive;">Stephen King</p>
+                    <p style="color:white;">"O crima oribila. O investigatie incalcita."</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item">
+            <div id="recRow3" class="row">
+                <div class="col-3">
+                    @*<img src="img/totinainte.jpg" class="bookR" alt="totinainte-img">*@
+                    There must be an image
+                </div>
+                <div id="recCol3" class="col-9">
+                    <p style="font-family: 'Bad Script', cursive; font-size:40px;color:white;">"O vreme am crezut ca toate greutatile prin care am trecut in copilarie m-au acut mai puternica."</p>
+                    <p id="pSelect3">
+                        Ioana Nicolaie
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+
+    </a>
+</div>

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<BookMania.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Category/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+<div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+    <a asp-action="Create" class="buttonA"><img src="~/images/plus.png" style="width:28px;padding-bottom:6px;" /> Add Category</a>
+</div>
+<div class="card" style="margin-top:10px;">
+    <table class="table">
+        <thead>
+            <tr class="trA1">
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th> Details</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr class="trA2">
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td class="ml-auto">
+                    <a asp-action="Edit" asp-route-id="@item.CategoryId"><img src="~/images/pencil.png" class="imgT" style="width:24px;" /></a> |
+                    <a asp-action="Delete" asp-route-id="@item.CategoryId"><img src="~/images/remove.png" class="imgT" style="width:24px;" /></a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

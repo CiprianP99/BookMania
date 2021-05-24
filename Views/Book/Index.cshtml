@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BookMania.Models.Book>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Book/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+{
+    <div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+        <a asp-action="Create" class="buttonA"><img src="~/images/plus.png" style="width:28px;padding-bottom:6px;" /> Add Book</a>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    <div style="text-align:center">
+        Find Book by Title: @Html.TextBox("SearchString")
+        <input type="submit" class="searchBox" value="Search" />
+    </div>
+}
+@*<div class="card" style="margin-top:10px;">
+    <table class="table">
+        <thead>
+            <tr class="trA1">
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>Actions</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="trA2">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td class="ml-auto">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BookId"><img src="~/images/pencil.png" class="imgT" style="width:24px;" /></a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.BookId"><img src="~/images/eye.png" class="imgT" style="width:24px;" /></a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator")) { 
+                            <a asp-action="Delete" asp-route-id="@item.BookId"><img src="~/images/remove.png" class="imgT" style="width:24px;" /></a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>*@
+
+<div class="container-fluid">
+    <div class="row" style="text-align:center;padding:30px 30px;color:#db6400;">
+        @Html.DisplayNameFor(model => model.Title)
+        @foreach (var item in Model)
+        {
+
+            <div class="card" style="width:240px;height:300px;margin:10px auto;text-align:center; ">
+                @Html.DisplayFor(modelItem => item.Title);
+                <div style="width:180px;height:250px;background-color:grey;margin:auto;">
+
+                </div>
+                <div class="row">
+                    <div class="col-10 mx-auto">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BookId"><img src="~/images/pencil.png" class="imgT" style="width:24px;" /></a>
+                        }
+                        <a asp-action="Details" asp-route-id="@item.BookId"><img src="~/images/eye.png" class="imgT" style="width:24px;" /></a>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BookId"><img src="~/images/remove.png" class="imgT" style="width:24px;" /></a>
+                        }
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

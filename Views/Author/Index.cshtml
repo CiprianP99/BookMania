@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookMania.Models.Author>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Author/index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+</head>
+
+<div style="text-align:center;margin-top:20px;margin-bottom:20px;">
+    <a asp-action="Create" class="buttonA"><img src="~/images/plus.png" style="width:28px;padding-bottom:6px;" /> Add Author</a>
+</div>
+<div class="card" style="text-align:center;">
+    <table class="table">
+        <thead>
+            <tr class="trA1">
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th> @Html.DisplayNameFor(model => model.LastName)</th>
+                <th> Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="trA2">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.AuthorId"><img src="~/images/pencil.png" class="imgT" style="width:24px;" /></a> |
+                        <a asp-action="Details" asp-route-id="@item.AuthorId"><img src="~/images/eye.png" class="imgT" style="width:24px;" /></a> |
+                        <a asp-action="Delete" asp-route-id="@item.AuthorId"><img src="~/images/remove.png" class="imgT" style="width:24px;" /></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

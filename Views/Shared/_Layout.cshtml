@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookMania</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500&family=Sacramento&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    @{
+        var message = TempData["AlertMessage"] ?? string.Empty;
+    }
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-family: 'Sacramento', cursive;font-size:40px;">
+                    <img src="~/images/books.png" alt="books-img" style="width:58px;margin-right:10px;padding-bottom:5px;" />BookMania
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav ml-auto">
+
+                        @*<li class="nav-item">
+                                <button class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">My Profile</button>
+                            </li>*@
+                        @*<li class="nav-item" style="margin-left:15px;">
+                                <div class="dropdown show">
+                                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Menu
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" asp-area="" asp-controller="Book" asp-action="Index">Manage Books</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Author" asp-action="Index">Manage Authors</a>
+                                        <a class="dropdown-item" asp-area="" asp-controller="Category" asp-action="Index">Manage Categories</a>
+                                    </div>
+                                </div>
+                            </li>*@
+                        <partial name="_Loginpartial" />
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - BookMania - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+<script>
+        var message = '@message';
+if (message)
+    alert(message);
+</script>
+
+
+</body>
+</html>
