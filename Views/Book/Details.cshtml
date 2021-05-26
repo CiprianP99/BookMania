@@ -1,9 +1,7 @@
-﻿@model BookMania.Models.Book
+﻿@model BookMania.ViewModels.BookDetailViewModel
 
-@{
-    ViewData["Title"] = "Details";
-}
 <head>
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/Book/details.css" />
@@ -12,56 +10,134 @@
     <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 </head>
-    <hr />
-    <div class="card" style="text-align:center;">
-        <div class="row" style="color:#db6400;">
-            <div class="col-4">
-                @Html.DisplayNameFor(model => model.Title)
-            </div>
-            <div class="col-4">
-                @Html.DisplayNameFor(model => model.Pages)
-            </div>
-            <div class="col-4">
-                @Html.DisplayNameFor(model => model.Year)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                @Html.DisplayFor(model => model.Title)
-            </div>
-            <div class="col-4">
-                @Html.DisplayFor(model => model.Pages)
-            </div>
-            <div class="col-4">
-                @Html.DisplayFor(model => model.Year)
-            </div>
-        </div>
-        <div class="row" style="color:#db6400;">
-            <div class="col-12">
-                @Html.DisplayNameFor(model => model.Description)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                @Html.DisplayFor(model => model.Description)
-            </div>
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js"></script>
+    <script src="//js.pusher.com/4.0/pusher.min.js"></script>
+    <style>
+        .user_name {
+            font-size: 14px;
+            font-weight: bold;
+        }
 
-        </div>
-        <div class="row" style="color:#db6400;">
-            <div class="col-12">
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                @Html.DisplayFor(model => model.CategoryId)
-            </div>
+        .comments-list .media {
+            border-bottom: 1px dotted #ccc;
+        }
+    </style>*@
+<hr />
 
+<div class="card" style="text-align:center;">
+    <div class="row" style="color:#db6400;">
+        <div class="col-4">
+            @Html.DisplayNameFor(model => model.Title)
+        </div>
+        <div class="col-4">
+            @Html.DisplayNameFor(model => model.Pages)
+        </div>
+        <div class="col-4">
+            @Html.DisplayNameFor(model => model.Year)
         </div>
     </div>
+    <div class="row">
+        <div class="col-4">
+            @Html.DisplayFor(model => model.Title)
+        </div>
+        <div class="col-4">
+            @Html.DisplayFor(model => model.Pages)
+        </div>
+        <div class="col-4">
+            @Html.DisplayFor(model => model.Year)
+        </div>
+    </div>
+    <div class="row" style="color:#db6400;">
+        <div class="col-12">
+            @Html.DisplayNameFor(model => model.Description)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.DisplayFor(model => model.Description)
+        </div>
+
+    </div>
+    <div class="row" style="color:#db6400;">
+        <div class="col-12">
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </div>
+
+
+    </div>
+    <div class="row" style="color:#db6400;">
+        <div class="col-12">
+            @Html.DisplayNameFor(model => model.Authors)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            @Html.DisplayFor(model => model.Authors)
+        </div>
+       
+    </div>
+
+    
+
     <div style="text-align:center;margin-top:10%;">
-       <a asp-action="Edit" class="buttonB" asp-route-id="@Model.BookId">Edit</a> | 
+        <a asp-action="Edit" class="buttonB" asp-route-id="@Model.BookId">Edit</a> |
         <a asp-action="Index" class="buttonB">Back to List</a>
     </div>
+
+    @*<script>
+            var pusher = new Pusher('XXX_APP_KEY', {
+                cluster: 'XXX_APP_CLUSTER'
+            });
+            var my_channel = pusher.subscribe('asp_channel');
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    comments: [],
+                    comment: {
+                        Name: '',
+                        Body: '',
+                        BookId: @Model.BookId
+                    }
+                },
+                created: function() {
+                    this.get_comments();
+                    this.listen();
+                },
+                methods: {
+                    get_comments: function() {
+                        axios.get(@Url.Action("Review", "Book", new { id = @Model.BookId });
+                            .then((response) => {
+
+                                this.comments = response.data;
+
+                            });
+
+                    },
+                    listen: function() {
+                        my_channel.bind("asp_event", (data) => {
+                            if (data.BookId == this.comment.BookId) {
+                                this.comments.push(data);
+                            }
+
+                        })
+                    },
+                    submit_comment: function() {
+                        axios.post('@Url.Action("Review", "Book", new {})', this.comment)
+                            .then((response) => {
+                                this.comment.Name = '';
+                                this.comment.Body = '';
+                                alert("Comment Submitted");
+
+                            });
+                    }
+                }
+            });
+        </script>*@
 
 

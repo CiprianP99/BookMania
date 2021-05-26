@@ -13,6 +13,10 @@ namespace BookMania.Models
 
         public string ReviewText { get; set; }
 
+        public int? BookId { get; set; }
+
+        public int? UserId { get; set; }
+
         public Book Book { get; set; }
 
         public User User { get; set; }

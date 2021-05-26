@@ -68,6 +68,7 @@ namespace BookMania
                 .AddEntityFrameworkStores<BookContext>().AddDefaultTokenProviders();
 
             services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddCloudscribePagination();
             //services.AddScoped<IUserClaimsPrincipalFactory<User>, AppClaimsPrincipalFactory>();
         }
 

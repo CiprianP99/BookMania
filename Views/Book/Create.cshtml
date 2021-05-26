@@ -15,7 +15,7 @@
 
 <hr />
 <div class="card" >
-    <form asp-action="Create">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
 
@@ -45,6 +45,15 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label asp-for="Photo" class="control-label">Choose Book Photo</label>
+                    <input asp-for="Photo" style="text-align:center; background-color:#24305E; border: 0;color:red;" class="form-control " />
+                    <span asp-validation-for="Photo" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
         <div class="form-group row" style="text-align: center;">
             <div class="col-sm-2">
                 <label>Authors:</label>
@@ -65,11 +74,11 @@
             @Html.ValidationMessageFor(model => model.CategoryId)
 
         </div>
-        
-            
 
 
-        
+
+
+
         <div class="form-group">
             <input type="submit" value="Create" class="btn btn-primary" />
         </div>

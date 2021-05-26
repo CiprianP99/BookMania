@@ -85,6 +85,62 @@ a {
     border-color: #cdc733;
 }
 
+.commentBox {
+    background-color: #efefef;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.starFade {
+    background-image: url('/wwwroot/images/StarFade.gif'); 
+    min-width: 30px; 
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starFadeN {
+    background-image: url('/wwwroot/images/StarFade.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+
+.starGlow {
+    background-image: url('/wwwroot/images/StarGlow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.starGlowN {
+    background-image: url('/wwwroot/images/StarGlow.gif');
+    min-width: 30px;
+    min-height: 30px;
+    display: inline-block;
+}
+#lastContainer {
+    text-align: center;
+    background-color: #cdc733 !important;
+    color: white;
+    font-family: 'Dancing Script', cursive;
+   width:100%;
+    position:absolute;
+    left:0;
+    
+}
+.bookR {
+    width: 200px;
+    border-radius: 8px;
+}
+
+.hrN {
+    border-top: 15px dotted #64dfdf;
+    margin-bottom: 64px;
+    width: 5%;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

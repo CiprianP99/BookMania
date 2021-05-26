@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BookMania.Models.Book>
+@*@model cloudscribe.Pagination.Models.PagedResult<Book>*@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -64,25 +65,27 @@
 
 <div class="container-fluid">
     <div class="row" style="text-align:center;padding:30px 30px;color:#db6400;">
-        @Html.DisplayNameFor(model => model.Title)
+        @*@Html.DisplayNameFor(model => model.Title)*@
         @foreach (var item in Model)
         {
-
-            <div class="card" style="width:240px;height:300px;margin:10px auto;text-align:center; ">
-                @Html.DisplayFor(modelItem => item.Title);
+            var photoPath = "~/Images/" + (item.bookImg ?? "noimage.jpg");
+            <div class="card" style="width:240px;height:380px;margin:10px auto;text-align:center;padding-top:15px; padding-bottom:30px; ">
+                @Html.DisplayFor(modelItem => item.Title)
                 <div style="width:180px;height:250px;background-color:grey;margin:auto;">
-
+                    <img src="@photoPath" asp-append-version="true" style="width:180px; height:250px;" />
                 </div>
                 <div class="row">
                     <div class="col-10 mx-auto">
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
+                        {
+                            <a asp-action="Details" asp-route-id="@item.BookId" class="btn btn-primary" style="width:150px;height:40px;margin-top:20px;">View Book</a>
+                        }
+
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                         {
                             <a asp-action="Edit" asp-route-id="@item.BookId"><img src="~/images/pencil.png" class="imgT" style="width:24px;" /></a>
-                        }
-                        <a asp-action="Details" asp-route-id="@item.BookId"><img src="~/images/eye.png" class="imgT" style="width:24px;" /></a>
-                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
-                        {
                             <a asp-action="Delete" asp-route-id="@item.BookId"><img src="~/images/remove.png" class="imgT" style="width:24px;" /></a>
+                            <a asp-action="Details" asp-route-id="@item.BookId"><img src="~/images/eye.png" class="imgT" style="width:24px;" /></a>
                         }
                     </div>
                 </div>
@@ -90,4 +93,19 @@
 
         }
     </div>
+    @*<cs-pager 
+              cs-paging-pagenumber=(int)Model.PageNumber
+              cs-paging-totalitems=(int)Model.TotalItems
+              cs-paging-pagesize=(int)Model.PageSize
+              cs-pagenumber-param="pagenumber"
+              asp-controller="Book"
+              asp-action="Index"
+
+              cs-pager-li-current-class="page-item active"
+              cs-pager-li-other-class="page-item"
+              cs-pager-li-non-active-class="page-item disabled"
+              cs-pager-link-current-class="page-link"
+              cs-pager-link-other-class="page-link"
+
+     ></cs-pager>*@
 </div>

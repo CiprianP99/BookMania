@@ -1,11 +1,13 @@
-﻿using System;
+﻿using BookMania.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BookMania.Models
+namespace BookMania.ViewModels
 {
-    public class Book
+    public class BookDetailViewModel
     {
         public int BookId { get; set; }
 
@@ -17,16 +19,11 @@ namespace BookMania.Models
 
         public int Year { get; set; }
 
-        public string bookImg { get; set; }
-
-        public int? CategoryId { get; set; }
-
+        [Display(Name = "Category")]
+        public string CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
 
-        public ICollection<BookAuthor> BookAuthors { get; set; }
-
-
+        public string Authors { get; set; }
     }
 }

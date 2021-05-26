@@ -16,24 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20210523110359_latestMig.cs" />
-    <Compile Remove="Migrations\20210523110359_latestMig.Designer.cs" />
-    <Compile Remove="Migrations\20210523110445_LatestMigOfCategory.cs" />
-    <Compile Remove="Migrations\20210523110445_LatestMigOfCategory.Designer.cs" />
-    <Compile Remove="Migrations\20210523110551_latestmIGADDed.cs" />
-    <Compile Remove="Migrations\20210523110551_latestmIGADDed.Designer.cs" />
-    <Compile Remove="Migrations\20210523110623_LatestMigrationAdded.cs" />
-    <Compile Remove="Migrations\20210523110623_LatestMigrationAdded.Designer.cs" />
-    <Compile Remove="Migrations\20210523215846_imgMig.cs" />
-    <Compile Remove="Migrations\20210523215846_imgMig.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Views\Category\Details.cshtml" />
     <Content Remove="wwwroot\css\Category\details.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="cloudscribe.Pagination.Models" Version="1.1.0" />
+    <PackageReference Include="cloudscribe.Web.Pagination" Version="3.1.0" />
+    <PackageReference Include="jQuery.Validation" Version="1.19.3" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.11" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.11" />
@@ -44,6 +35,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PusherServer" Version="4.6.1" />
   </ItemGroup>
 
   <ItemGroup>

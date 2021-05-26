@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BookMania.Migrations
 {
-    public partial class initialMig : Migration
+    public partial class initalMigg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -195,6 +195,7 @@ namespace BookMania.Migrations
                     Description = table.Column<string>(nullable: true),
                     Pages = table.Column<int>(nullable: false),
                     Year = table.Column<int>(nullable: false),
+                    bookImg = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -209,7 +210,7 @@ namespace BookMania.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookAuthors",
+                name: "BookAuthor",
                 columns: table => new
                 {
                     BookAuthorId = table.Column<int>(nullable: false)
@@ -219,15 +220,15 @@ namespace BookMania.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookAuthors", x => x.BookAuthorId);
+                    table.PrimaryKey("PK_BookAuthor", x => x.BookAuthorId);
                     table.ForeignKey(
-                        name: "FK_BookAuthors_Authors_AuthorId",
+                        name: "FK_BookAuthor_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "AuthorId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_BookAuthors_Books_BookId",
+                        name: "FK_BookAuthor_Books_BookId",
                         column: x => x.BookId,
                         principalTable: "Books",
                         principalColumn: "BookId",
@@ -243,7 +244,8 @@ namespace BookMania.Migrations
                     Rating = table.Column<double>(nullable: false),
                     ReviewText = table.Column<string>(nullable: true),
                     BookId = table.Column<int>(nullable: true),
-                    UserId = table.Column<string>(nullable: true)
+                    UserId = table.Column<int>(nullable: true),
+                    UserId1 = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -255,8 +257,8 @@ namespace BookMania.Migrations
                         principalColumn: "BookId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Reviews_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Reviews_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -312,13 +314,13 @@ namespace BookMania.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookAuthors_AuthorId",
-                table: "BookAuthors",
+                name: "IX_BookAuthor_AuthorId",
+                table: "BookAuthor",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookAuthors_BookId",
-                table: "BookAuthors",
+                name: "IX_BookAuthor_BookId",
+                table: "BookAuthor",
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
@@ -332,9 +334,9 @@ namespace BookMania.Migrations
                 column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reviews_UserId",
+                name: "IX_Reviews_UserId1",
                 table: "Reviews",
-                column: "UserId");
+                column: "UserId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -355,7 +357,7 @@ namespace BookMania.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "BookAuthors");
+                name: "BookAuthor");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

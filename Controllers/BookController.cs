@@ -12,6 +12,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Web;
+using Microsoft.AspNetCore.Identity;
+using PusherServer;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using cloudscribe.Pagination.Models;
 
 namespace BookMania.Controllers
 {
@@ -22,15 +27,19 @@ namespace BookMania.Controllers
         private readonly AuthorService _authorService;
         private readonly BookAuthorService _bookAuthorService;
         private readonly CategoryService _categoryService;
+        private readonly ReviewService _reviewService;
+        private readonly IHostingEnvironment _hostEnv;
         private readonly IUnitOfWork _unit;
 
 
-        public BookController(BookService bookService, AuthorService authorService, BookAuthorService bookAuthorService, CategoryService categoryService, IUnitOfWork unit)
+        public BookController(BookService bookService, AuthorService authorService, BookAuthorService bookAuthorService, CategoryService categoryService, ReviewService reviewService, IHostingEnvironment hosting,IUnitOfWork unit)
         {
             _bookService = bookService;
             _authorService = authorService;
             _bookAuthorService = bookAuthorService;
             _categoryService = categoryService;
+            _reviewService = reviewService;
+            _hostEnv = hosting;
             _unit = unit;
         }
 
@@ -40,18 +49,30 @@ namespace BookMania.Controllers
         //};
         // GET: Books
         [Authorize(Roles = "Administrator,User")]
-        public IActionResult Index(string SearchString)
+        public IActionResult Index(string SearchString, int pageNumber = 1, int pageSize = 2)
         {
-            
+            //int ExcludeRecords = (pageSize * pageNumber) - pageSize;
+            //var books = _bookService.GetBooks().Skip(ExcludeRecords).Take(pageSize);
             var books = _bookService.GetBooks();
             //books = _bookService.GetBooksByCondition(a => a.Title == SearchString || a.Description == SearchString);
+        //    var result = new PagedResult<Book>
+        //    {
+        //        Data = books.ToList(),
+        //        TotalItems = books.ToList().Count(),
+        //        PageNumber = pageNumber,
+        //        PageSize = pageSize
+        //};
+            
             if (!String.IsNullOrEmpty(SearchString))
             {
                 books = books.Where(s => s.Title.Contains(SearchString)).ToList();
+                //return View(books);
             }
             return View(books);
+           // return View(result);
         }
 
+      
 
         // GET: Books/Details/5
         [Authorize(Roles = "Administrator,User")]
@@ -68,8 +89,34 @@ namespace BookMania.Controllers
             {
                 return NotFound();
             }
+            IEnumerable<BookAuthor> bookAuthors = _bookAuthorService.GetBookAuthors().Where(b => b.BookId == book.BookId);
+            List<Author> authors = new List<Author>();
+            foreach (var ba in bookAuthors)
+            {
+                authors.Add(_authorService.GetAuthors().FirstOrDefault(a => a.AuthorId == ba.AuthorId));
+            }
 
-            return View(book);
+            string auth = null;
+            foreach (var currentAuthor in authors)
+            {
+                auth += currentAuthor.FirstName;
+                auth += ", ";
+            }
+
+
+            var vm = new BookDetailViewModel
+            {
+                BookId = book.BookId,
+                Title = book.Title,
+                Year = book.Year,
+                Pages = book.Pages,
+                Description = book.Description,
+                Category = _categoryService.GetCategories().FirstOrDefault(g => g.CategoryId == book.CategoryId),
+                Authors = auth
+            };
+
+
+            return View(vm);
         }
 
         // GET: Books/Create
@@ -96,6 +143,15 @@ namespace BookMania.Controllers
         {
             if (ModelState.IsValid)
             {
+                string uniqueFileName = null;
+                if (book.Photo != null)
+                {
+                    string uploadsFolder = Path.Combine(_hostEnv.WebRootPath, "images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "" + book.Photo.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    book.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+
+                }
                 //_unit.UploadImage(file);
                 Category selectedCategory = _categoryService.GetCategories().SingleOrDefault(a => a.CategoryId == book.CategoryId);
                 Book newBook = new Book
@@ -106,7 +162,7 @@ namespace BookMania.Controllers
                     Pages = book.Pages,
                     BookAuthors = new List<BookAuthor>(),
                     CategoryId = selectedCategory.CategoryId,
-                   
+                    bookImg = uniqueFileName,
                     //bookImg = file.Filename
                 };
                 var authorList = new List<Author>();
@@ -146,6 +202,23 @@ namespace BookMania.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(book);
+        }
+
+        public IActionResult Review(int? id)
+        {
+            var reviews = _reviewService.GetReviews().Where(x => x.Book.BookId == id).ToArray();
+            return Json(reviews, System.Web.Mvc.JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Review(Review data)
+        {
+            _reviewService.AddReview(data);
+            _reviewService.Save();
+            var options = new PusherOptions();
+            options.Cluster = "XXX_APP_CLUSTER";
+            var pusher = new Pusher("XXX_APP_ID", "XXX_APP_KEY", "XXX_APP_SECRET", options);
+            ITriggerResult result = await pusher.TriggerAsync("asp_channel", "asp_event", data);
+            return Content("ok");
         }
 
         // GET: Books/Edit/5

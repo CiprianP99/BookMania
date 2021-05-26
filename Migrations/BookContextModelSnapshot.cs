@@ -59,8 +59,8 @@ namespace BookMania.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("bookImg")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("bookImg")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("BookId");
 
@@ -122,14 +122,17 @@ namespace BookMania.Migrations
                     b.Property<string>("ReviewText")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ReviewId");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Reviews");
                 });
@@ -394,7 +397,7 @@ namespace BookMania.Migrations
 
                     b.HasOne("BookMania.Models.User", "User")
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,4 +1,5 @@
 ﻿using BookMania.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -23,30 +24,7 @@ namespace BookMania.ViewModels
 
         public string bookImg { get; set; }
 
-
-        //public List<SelectListItem> AuthorItems
-        //{
-        //    get
-        //    {
-        //        List<SelectListItem> listItems = new List<SelectListItem>();
-        //        if (BookAuthors != null)
-        //            listItems.AddRange(BookAuthors.Select(Item => new SelectListItem { Value = Item.AuthorId + "", Text = Item.FirstName }));
-        //        return listItems;
-        //    }
-        //}
-
-        //public List<SelectListItem>CategoryItems
-        //{
-        //    get
-        //    {
-        //        List<SelectListItem> listItemsC = new List<SelectListItem>();
-        //        if (Categories != null)
-        //            listItemsC.AddRange(Categories.Select(Item => new SelectListItem { Value = Item.CategoryId + "", Text = Item.CategoryName }));
-        //        return listItemsC;
-        //    }
-        //}
-
-
+        public IFormFile Photo { get; set; }
 
         public ICollection<Category> Categories { get; set; }
 
@@ -61,10 +39,5 @@ namespace BookMania.ViewModels
         public int SelectedCategory { get; set; }
 
         
-
-
-
-        //[Display(Name="Category")]
-        //public int SelectedCategory { get; set; }
     }
 }
